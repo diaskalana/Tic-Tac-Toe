@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+}
+*:focus {
+  outline: none;
+}
+::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: "Protest Revolution", sans-serif;
+}
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.gameContainer h1,
+.gameContainer p {
+  text-align: center;
+}
+.gameContainer h1 {
+  font-size: 5rem;
+  margin: 0;
+}
+.gameContainer p {
+  /* visibility: hidden; */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+}
+.gameBoard {
+  display: grid;
+  background-color: black;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 1.5px;
+  width: 400px;
+  aspect-ratio: 1;
+}
+.gameBoard > div {
+  background-color: white;
+  cursor: pointer;
+  font-size: 5rem;
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gameBoard > div:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.gameBoard > div.checked:hover {
+  background-color: white;
+}
+
+/* Github corner */
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+@media (max-width: 500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
