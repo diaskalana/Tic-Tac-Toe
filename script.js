@@ -20,10 +20,19 @@ function Gameboard() {
                     currentCell.classList.add('checked');
                 } else {
                     currentCell.textContent = '';
+                    currentCell.classList.remove('checked');
                 }
             }
         }
 
+    }
+
+    function freezeCells() {
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                document.querySelector(`div[row="${i + 1}"][column="${j + 1}"]`).classList.add('checked')
+            }
+        }
     }
 
     function resetCells() {
@@ -36,7 +45,7 @@ function Gameboard() {
 
     }
 
-    return { addResponse, markCells, resetCells, board };
+    return { addResponse, markCells, resetCells, freezeCells, board };
 }
 
 function Player(marker) {
@@ -77,11 +86,11 @@ function gameController(player1, player2, board) {
         let winner = winnerMarker()
         if (winner != 0) {
             if (winner == 'x') {
-                return 'Player1 Wins'
+                return 'Player1 Wins!'
             } else if (winner == 'o') {
-                return 'Player2 Wins'
+                return 'Player2 Wins!'
             } else {
-                return "It's a draw"
+                return "It's a draw!"
             }
 
         } else {
@@ -130,6 +139,7 @@ function gameController(player1, player2, board) {
 
 const gameBoard = document.querySelector('.gameBoard')
 const message = document.querySelector('.gameContainer > p')
+const resetBtn = document.querySelector('.resetBtn')
 
 const gameboard = Gameboard();
 
@@ -150,7 +160,16 @@ gameBoard.addEventListener('click', (e) => {
             message.textContent = gameControl.turnMessage()
             if (gameControl.checkWinner()) {
                 message.textContent = gameControl.checkWinner()
+                gameboard.freezeCells()
+                resetBtn.style.visibility = 'visible'
             }
         }
     }
+})
+
+resetBtn.addEventListener('click', () => {
+    gameboard.resetCells()
+    resetBtn.style.visibility = 'hidden'
+    gameControl.switchPlayerTurn()
+    message.textContent = gameControl.turnMessage()
 })
